@@ -8,6 +8,12 @@ import java.util.Scanner;
 public class B4_Control_Flow {
     public static void  main(String[] args)
     {
+        demSoNgayCuaThang();
+        cacNgayTrongTuan();
+        veTamGiac1();
+        veTamGiac2();
+        reversedNumber();
+        veTamGiacPascal();
         kiemTraKiTu();
     }
     private static void demSoNgayCuaThang()
