@@ -8,13 +8,8 @@ import java.util.Scanner;
 public class B4_Control_Flow {
     public static void  main(String[] args)
     {
-        demSoNgayCuaThang();
-        cacNgayTrongTuan();
-        veTamGiac1();
+
         veTamGiac2();
-        reversedNumber();
-        veTamGiacPascal();
-        kiemTraKiTu();
     }
     private static void demSoNgayCuaThang()
     {
@@ -117,16 +112,15 @@ public class B4_Control_Flow {
         }
     }
     private static void veTamGiac2() {
-        int i, j, n;
+        int i,j,n,k=1;
         System.out.print("Moi ban nhap so hang can ve : ");
         Scanner in = new Scanner(System.in);
         n = in.nextInt();
-
-        for (i = 1; i <= n; i++) {
-            for (j = 1; j <= i; j++)
-                System.out.print(j + " ");
-
-            System.out.println("");
+        for(i=1;i<=n;i++)
+        {
+            for(j=1;j<=i;j++)
+                System.out.print(k++);
+            System.out.println(" ");
         }
     }
     private static void reversedNumber()
@@ -182,4 +176,5 @@ public class B4_Control_Flow {
         else
             System.out.println("Not Balanced ");
     }
+
 }
