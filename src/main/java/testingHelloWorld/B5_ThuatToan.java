@@ -5,10 +5,7 @@ import java.util.Scanner;
 public class B5_ThuatToan {
     public static void main (String[] args)
     {
-        tinhTong();
-        tinhCanBac2();
-        giaiPhuongTrinhBac2();
-        tinhTien();
+        tinhTienTimMax();
     }
     private static void tinhTong()
     {
@@ -66,18 +63,59 @@ public class B5_ThuatToan {
         float tinh = a*x*x+b*x+c;
         System.out.printf("fx bang %f",tinh);
     }
-    private static void tinhTien()
+    private static void tinhTienTimMax()
     {
-        int x,y,z;
-        //x+2y+5z=200
-        //200 * 1000 = 200000 => x thuộc [0, 200]
-        // 100 * 2000 = 200000 => y thuộc [0, 100]
-        // 40 * 5000 = 200000 => z thuộc [0, 40]
+        int count = 0;
+        // Số lượng lớn nhất của mỗi mệnh giá
+        int iMax = 0, jMax = 0, kMax = 0;
+        // Tổng max
+        int max = 0;
+        for(int i = 0; i <= 200; i++){
+            for(int j = 0; j<=100; j++){
+                for(int k=0; k<=40; k++ ){
+                    if((i + 2 * j + 5 * k) == 200){
+                        if(i >= 1 && j >= 1 && k >= 1){
+                            if(max < (i + j + k)){
+                                max = i + j + k;
+                                iMax = i;
+                                jMax = j;
+                                kMax = k;
+                            }
+                        }
+                        count ++;
+                        System.out.printf("%d to 1000, %d to 2000, %d to 5000 \n",i, j, k);
+                    }
+                }
+            }
+        }
+        System.out.printf("Tổng trường hợp đúng là %d \n", count);
+        System.out.printf("Trường hợp có tổng số tờ tiền cao nhất là %d, %d 1000 VND, %d 2000 VND, %d 5000 VND",max, iMax,jMax, kMax);
+    }
+    private static void tinhTienTimMin()
+    {
+        int count = 0;
+        // Số lượng lớn nhất của mỗi mệnh giá
+        int iMax = 0, jMax = 0, kMax = 0;
+        int iMin = 0, jMin = 0, kMin = 0;
+        // Tổng max
+        int max = 0;
+        int min = 40;
+        for(int i = 0; i <= 200; i++){
+            for(int j = 0; j<=100; j++){
+                for(int k=0; k<=40; k++ ){
+                    if((i + 2 * j + 5 * k) == 200){
+                        if(i >= 1 && j >= 1 && k >= 1){
+                            if(min>(i+j+k)){
 
-        for ( x = 0; x <= 200; ++x)
-            for ( y = 0; y <= 100; ++y)
-                for ( z = 0; z <= 40; ++z)
-                    if (x * 1000 + y * 2000 + z * 5000 == 200000)
-                        System.out.println("so to 1000 " + x + " ,so to 2000 " + y + " ,so 5000 " + z);
+                            }
+                        }
+                        count ++;
+                        System.out.printf("%d to 1000, %d to 2000, %d to 5000 \n",i, j, k);
+                    }
+                }
+            }
+        }
+        System.out.printf("Tổng trường hợp đúng là %d \n", count);
+        System.out.printf("Trường hợp có tổng số tờ tiền cao nhất là %d, %d 1000 VND, %d 2000 VND, %d 5000 VND",max, iMax,jMax, kMax);
     }
 }
