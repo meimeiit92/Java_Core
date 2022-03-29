@@ -1,4 +1,4 @@
-package OOP;
+package OOP.truuTuong.ThayHuy;
 
 public class Bai1_HCN {
     private double chieuDai, chieuRong, chuVi, dienTich;

@@ -1,4 +1,4 @@
-package OOP;
+package OOP.truuTuong.ThayHuy;
 
 public class Bai3_main {
     public static void main(String[] args)

@@ -1,4 +1,4 @@
-package OOP;
+package OOP.truuTuong.ThayHuy;
 
 public class Bai2_SinhVien {
     private int maSinhVien;

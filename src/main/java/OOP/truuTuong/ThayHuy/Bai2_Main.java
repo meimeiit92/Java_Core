@@ -1,4 +1,4 @@
-package OOP;
+package OOP.truuTuong.ThayHuy;
 
 import java.util.Scanner;
 

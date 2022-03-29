@@ -1,4 +1,4 @@
-package OOP;
+package OOP.truuTuong.ThayHuy;
 
 public class Bai3_Vehicle {
     private double giaTriXe, thueXe=0;
