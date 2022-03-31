@@ -9,6 +9,7 @@ public class ResizableCircle extends Circle implements Resiable{
     public void resize(int percent){
         radius *= percent/100.0;
     }
+
     public String toString(){
         return super.toString();
     }
