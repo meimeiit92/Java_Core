@@ -75,7 +75,8 @@ public class PhanSo {
         do{
             mau=nhapgt();
             if(mau==0) System.out.print("Nhap lai mau so");
-        }while(mau==0);
+        }
+        while(mau==0);
         PhanSo ps = new PhanSo(tu,mau);
         return ps;
     }
