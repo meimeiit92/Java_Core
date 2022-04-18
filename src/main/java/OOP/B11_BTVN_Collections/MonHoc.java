@@ -26,4 +26,12 @@ public class MonHoc {
 
     public MonHoc() {
     }
+
+    @Override
+    public String toString() {
+        return "MonHoc{" +
+                "maMH='" + maMH + '\'' +
+                ", tenMH='" + tenMH + '\'' +
+                '}';
+    }
 }
