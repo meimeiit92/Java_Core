@@ -1,23 +1,8 @@
 package OOP.B10_BTVN_Generic;
 
-public class Drawable <T>{
-    private T t;
-
-    public Drawable(T t) {
-        this.t = t;
+public class Drawable {
+    public <T extends IHinhHoc> void draw(T t){
+        System.out.println(t.toString());
     }
 
-    public Drawable() {
-    }
-
-    public T getT() {
-        return t;
-    }
-
-    public void setT(T t) {
-        this.t = t;
-    }
-    public void draw (){
-        System.out.println("Ve ra " + t);
-    }
 }

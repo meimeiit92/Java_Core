@@ -2,13 +2,11 @@ package OOP.B10_BTVN_Generic;
 
 public class Main_Drawable {
     public static void main(String[] args) {
-        Drawable hinhTron = new Drawable<HinhTron>();
-        hinhTron.setT(new HinhTron(2));
-        hinhTron.draw();
-
-        Drawable hinhVuong = new Drawable<HinhVuong>();
-        hinhVuong.setT(new HinhVuong(2));
-        hinhVuong.draw();
+        Drawable drawable = new Drawable();
+        HinhTron hTron = new HinhTron(2);
+        HinhVuong hVuong = new HinhVuong(2);
+        drawable.draw(hTron);
+        drawable.draw(hVuong);
 
     }
 }
