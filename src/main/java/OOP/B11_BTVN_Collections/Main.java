@@ -3,6 +3,7 @@ package OOP.B11_BTVN_Collections;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Main {
 
@@ -164,7 +165,7 @@ public class Main {
                 String maSV2 = in.next();
                 int count2=0;
                 for (int i = 0; i < lstSinhVien.size(); i++) {
-                    if (maSV2 == lstSinhVien.get(i).getMaSV()) {
+                    if (maSV2.equals(lstSinhVien.get(i).getMaSV())) {
                         sv3 = lstSinhVien.get(i);
                         count2 = count2 + 1;
                     }
@@ -173,12 +174,29 @@ public class Main {
                     System.out.println("Khong tim thay sinh vien nao co ID =" +maSV2);
                 }
                 else {
+                    Stack<String> stack = new Stack<>();
                     System.out.println("Sinh vien tim thay co ID = "+maSV2);
                     for(int i =0; i<lstDiemSV.size();i++){
-                        //if(maSV2.equals(lstDiemSV.get()))
+                        if(maSV2.equals(lstDiemSV.get(i).getMaSV())){
+                            String item = lstDiemSV.get(i).getMaMH() + "   " + lstDiemSV.get(i).getDiemSo();
+                           stack.push(item);
+                        }
                     }
+                    System.out.printf("%s %s \n","Ma Mon Hoc", "Diem So");
+                    System.out.println(stack);
                 }
             case 9:
+                for (int i=0;i<lstMonHoc.size();i++){
+                    String maMH = lstMonHoc.get(i).getMaMH();
+                    Stack<String> stack = new Stack<>();
+                    for(int j =0;j<lstDiemSV.size();j++){
+
+                        if(maMH.equals(lstDiemSV.get(j).getMaMH())){
+                            stack.push(lstDiemSV.get(j).getMaSV());
+                        }
+                    }
+                    System.out.println("Mon hoc " + maMH + " co cac sinh vien la " + stack);
+                }
             case 10:
 
         }
