@@ -14,7 +14,7 @@ public class LinkedListDemo {
         // Khi nao nen dung Arrayist khi nao nen dung LinkedList: ve co ban 2 thang nay tuong tu nhau
         // Arrayist dungf cho danh sach dong, k can biet chinh xac so phan tu, cham hon, mang thuong xuyen them suwar xoa du lieu thi nen dung linkedList
         // linkedList trien khai danh sach lien ket doi
-
+        // project = "OMRE-Customer Engine" AND type in (Task, Story) AND Sprint
         System.out.println(linkedList);
     }
 }
