@@ -1,4 +1,4 @@
-package OOP.B12_Set.Lamda_BTVN;
+package OOP.B13_Lambda.Lambda.Lamda_BTVN;
 
 import java.util.ArrayList;
 import java.util.Arrays;

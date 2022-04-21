@@ -1,4 +1,4 @@
-package OOP.B12_Set.Lambda;
+package OOP.B13_Lambda.Lambda;
 
 public class Main2 {
     public static void main(String[] args) {
