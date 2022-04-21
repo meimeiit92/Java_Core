@@ -1,4 +1,4 @@
-package OOP.B13_Lambda.Lambda;
+package OOP.B13_Lambda.Lambda.BaiMau;
 
 import java.util.function.Predicate;
 

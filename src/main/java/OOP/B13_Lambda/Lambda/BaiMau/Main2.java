@@ -1,4 +1,4 @@
-package OOP.B13_Lambda.Lambda;
+package OOP.B13_Lambda.Lambda.BaiMau;
 
 public class Main2 {
     public static void main(String[] args) {

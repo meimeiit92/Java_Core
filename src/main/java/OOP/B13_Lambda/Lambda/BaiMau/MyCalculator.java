@@ -1,4 +1,4 @@
-package OOP.B13_Lambda.Lambda;
+package OOP.B13_Lambda.Lambda.BaiMau;
 
 public class MyCalculator {
     // Chi cho phep tinh toan cong , tru, nhan, chia co ban, dong thoi cho phep nguoi dung tu dinnh nghia
