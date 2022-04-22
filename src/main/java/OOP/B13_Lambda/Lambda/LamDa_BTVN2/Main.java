@@ -17,7 +17,6 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        App app = App.getInstance();
         List<Student> lstStudent = new ArrayList<>();
         lstStudent.add(new Student("1","Mei1", "Nu",20,100 ));
         lstStudent.add(new Student("2","Mei2", "Nam",10,40 ));
