@@ -2,7 +2,7 @@ package OOP.B13_Lambda.Lambda.LamDa_BTVN2;
 
 public class Student {
     private String id, name, gender;
-    private int age, mark;
+    private double age, mark;
 
     public Student() {
     }
@@ -27,11 +27,11 @@ public class Student {
         return gender;
     }
 
-    public int getAge() {
+    public double getAge() {
         return age;
     }
 
-    public int getMark() {
+    public double getMark() {
         return mark;
     }
 

@@ -7,15 +7,7 @@ import java.util.function.Predicate;
 
 public class App {
     // functional interface
-    public static double inSo(Function<List<Student>, Double> fn, List<Student> lstStudent) {
-        return fn.apply(lstStudent);
-    }
 
-    public static void inString(Predicate<Student> predicate, Student student) {
-        if (predicate.test(student)) {
-            System.out.println(student);
-        }
-    }
 
     private static App app = null;
     private List<Student> studentList;
