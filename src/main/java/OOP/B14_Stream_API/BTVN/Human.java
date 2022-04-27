@@ -7,8 +7,9 @@ public class Human implements Comparable<Human> {
     @Override
     public int compareTo(Human human) {
         // sort human's name by ASC
-        this.getFirstName().compareTo(human.getFirstName());
-        return this.getLastName().compareTo(human.getLastName());
+        String thisFullName = this.lastName + " " + this.firstName;
+        String fullName = human.lastName + " " + human.firstName;
+        return thisFullName.compareTo(fullName);
     }
 
     public Human() {
