@@ -30,7 +30,7 @@ public class BTVN {
     }
     public static boolean checkPhone(String str) throws Exception {
         // Bieu thuc chinh quy mo ta dinh dang so dien thoai
-        String reg = "^(\\(?\\+84\\)?|0)([\\.\\-\\s])?(3[2-9]|8[6]|9[6-8])([1-9]|[\\.\\-])[1-9|\\-][1-9]{3}[\\.\\-]?[0-9]{2}[0-9]?";
+        String reg = "^(\\(?\\+84\\)?|0)([\\.\\-\\s])?(3[2-9]|8[6]|9[6-8])([1-9]|[\\.\\-\\s])[1-9|\\-\\s][1-9]{3}[\\.\\-\\s]?[0-9]{2}[0-9]?";
 
         // Kiem tra dinh dang
         boolean kt = str.matches(reg);
