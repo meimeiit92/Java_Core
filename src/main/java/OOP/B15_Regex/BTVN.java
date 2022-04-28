@@ -9,12 +9,7 @@ import java.util.regex.Pattern;
 
 public class BTVN {
     public static void main(String[] args) {
-        String[] arr = { "086", "096", "097", "098" , "032","033","034","035","036","037","038","039"};
-        List<String> lstDauSoViettel = Arrays.asList(arr);
-        Pattern pattern = Pattern.compile("(0)(8|9|3)[2-9]");
-        for ( String item : lstDauSoViettel) {
-            System.out.println(item + ": "+ Pattern.matches("(0)(8|9|3)[2-9]",item));
-        }
+
         // validate SDT
         Scanner in = new Scanner(System.in);
         System.out.println("moi ban nhap SDT");
@@ -30,15 +25,12 @@ public class BTVN {
             }
         }
         while (isSoDienThoai == false);
-        if (Pattern.matches("(((\\+|)84)|0)(3|5|7|8|9)+([2-9]{8})",soDienThoai))
-            System.out.println("Day la so dien thoai viettel");
-        else System.out.println("Day khong phai la sdt viettel");
 
 
     }
     public static boolean checkPhone(String str) throws Exception {
         // Bieu thuc chinh quy mo ta dinh dang so dien thoai
-        String reg = "^(0|\\+84)(\\s|\\.)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\\d)(\\s|\\.)?(\\d{3})(\\s|\\.)?(\\d{3})$";
+        String reg = "^(\\(?\\+84\\)?|0)([\\.\\-\\s])?(3[2-9]|8[6]|9[6-8])([1-9]|[\\.\\-])[1-9|\\-][1-9]{3}[\\.\\-]?[0-9]{2}[0-9]?";
 
         // Kiem tra dinh dang
         boolean kt = str.matches(reg);
@@ -46,7 +38,7 @@ public class BTVN {
         if (kt == false) {
             throw new Exception("Loi: Khong dung dinh dang!");
         } else {
-            System.out.println("Dung dinh dang so dien thoai!");
+            System.out.println("Dung dinh dang so dien thoai Viettel!");
         }
         return  kt;
     }
