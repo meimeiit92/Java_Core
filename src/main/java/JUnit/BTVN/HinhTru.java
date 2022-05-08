@@ -1,11 +1,23 @@
-package JUnit;
+package JUnit.BTVN;
 
-public class HinhTru extends HinhTron implements HinhHoc3D{
+public class HinhTru implements HinhHoc3D<Double>{
     private double chieuCao;
     private HinhTron hinhTron;
 
-    public HinhTru(double banKinh, double chieuCao, HinhTron hinhTron) {
-        super(banKinh);
+    public HinhTru() {
+    }
+
+    public void setChieuCao(double chieuCao) {
+        if (chieuCao <=0) throw new RuntimeException("Chieu cao phai duong");
+        this.chieuCao = chieuCao;
+    }
+
+    public void setHinhTron(HinhTron hinhTron) {
+        this.hinhTron = hinhTron;
+    }
+
+    public HinhTru(double chieuCao, HinhTron hinhTron) {
+        if(chieuCao<=0) throw new RuntimeException("Chieu cao phai duong");
         this.chieuCao = chieuCao;
         this.hinhTron = hinhTron;
     }

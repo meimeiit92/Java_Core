@@ -1,6 +1,6 @@
-package JUnit;
+package JUnit.BTVN;
 
-public class HinhTron implements HinhHoc2D{
+public class HinhTron implements HinhHoc2D<Double>{
     protected double banKinh;
 
     public double getBanKinh() {
@@ -8,11 +8,16 @@ public class HinhTron implements HinhHoc2D{
     }
 
     public void setBanKinh(double banKinh) {
+        if(banKinh<=0) throw new RuntimeException("Ban kinh khong hop le");
         this.banKinh = banKinh;
     }
 
     public HinhTron(double banKinh) {
+        if(banKinh<=0) throw new RuntimeException("Ban kinh khong hop le");
         this.banKinh = banKinh;
+    }
+
+    public HinhTron() {
     }
 
     @Override
