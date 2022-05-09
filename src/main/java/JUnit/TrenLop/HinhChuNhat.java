@@ -36,7 +36,7 @@ public class HinhChuNhat {
         return (chieuRong + chieuDai) *2;
     }
     public double tinhDienTich(){
-        return chieuDai*chieuRong;
+        return Math.round((chieuDai*chieuRong)*1000.0)/ (1000.0);
     }
 
     @Override
