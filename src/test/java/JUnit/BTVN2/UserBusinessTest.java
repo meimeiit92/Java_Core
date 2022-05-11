@@ -90,18 +90,35 @@ class UserBusinessTest {
                 ));
         return rs;
     }
-    @Test
-    void login() {
+    @ParameterizedTest(name="Test user {0} email {1} password {2} encrytPass {3} login {4}")
+    @MethodSource("dataUserEmailPasswordLogin")
+    void login(String userName, String email, String password, String passMd5, String login) {
+        Exception e = Assertions.assertThrows(RuntimeException.class,()->{
+            UserBusiness user = new UserBusiness();
+            user.setUserName(userName);
+            user.setEmail(email);
+            user.setPassword(password);
+            if(userName == null){
+                boolean isLogin = user.login(email,passMd5);
+            }
+            else if (email == null){
+                boolean isLogin = user.login(userName,passMd5);
+            }
+            else {
+                boolean isLogin = user.login(userName,passMd5);
+            }
+
+        });
+        Assertions.assertEquals("Password khong hop le",e.getMessage());
     }
-    static Stream<Arguments> dataUserEmailPassword() throws IOException {
-        Reader in = new FileReader("/home/mayvu/Desktop/Java_Core/First_Pr/src/test/resources/mData.csv");
-        List<CSVRecord> tmp = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in).getRecords();
-        // Tinh kinh thuoc, dong dau la header
-        long len = tmp.size();
-        Stream<Arguments> rs = tmp.stream().skip(5).limit(1)
-                .map(r-> Arguments.of(
-                        r.get(COL_PASSWORD)
-                ));
-        return rs;
+    static Stream<Arguments> dataUserEmailPasswordLogin() throws IOException {
+        Reader in = new FileReader("E:\\Meimei\\JavaCore\\Java_Core\\src\\test\\resources\\mData.csv");
+        Stream<Arguments> tmp = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in)
+                .stream()
+                .skip(1)
+                .limit(4)
+                .map(r -> Arguments.of(r.get(COL_USER),r.get(COL_EMAIL),r.get(COL_PASSWORD),r.get(COL_PASS_MD5),r.get(COL_LOGIN))
+                );
+        return tmp;
     }
 }

@@ -60,8 +60,9 @@ public class UserBusiness implements IUserBusiness{
     }
 
     @Override
-    public boolean login(String userNameActual, String passwordAcutal) {
-        if(passwordAcutal == password && (userNameActual == userName || userNameActual == email)) return  true;
+    public boolean login(String userNameInput, String maHoaInput) {
+       String maHoaPass = maHoaPassword(password);
+       if(maHoaPass.equals(maHoaInput)&& userNameInput==userName) return true;
         return false;
     }
     @Override
