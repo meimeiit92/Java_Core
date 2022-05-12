@@ -109,10 +109,10 @@ class UserBusinessTest {
             }
 
         });
-        Assertions.assertEquals("Password khong hop le",e.getMessage());
+        Assertions.assertEquals("Username khong hop le",e.getMessage());
     }
     static Stream<Arguments> dataUserEmailPasswordLogin() throws IOException {
-        Reader in = new FileReader("E:\\Meimei\\JavaCore\\Java_Core\\src\\test\\resources\\mData.csv");
+        Reader in = new FileReader("/home/mayvu/Desktop/Java_Core/First_Pr/src/test/resources/mData.csv");
         Stream<Arguments> tmp = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in)
                 .stream()
                 .skip(1)
