@@ -19,5 +19,7 @@ public class main {
         // (?=.*[A-Z]) co it nhat 1 chu hoa
         // (?=.*[@#$%^&+=]) co it nhat 1 ky tu dac biet
         // (?=\\S+$) khong duoc co khoang trang trong toan bo chuoi
+        // \w chu viet hoa va viet thuong
+        // \d so bat ky
     }
 }

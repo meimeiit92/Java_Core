@@ -3,10 +3,16 @@ package JUnit.BTVN2;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 public class UserBusiness implements IUserBusiness{
     String userName, email, password;
-
+    private final String patternUserName = "^[a-zA-Z_]([_a-zA-Z0-9]){0,19}$";
+    private final String patternPassword = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[#$&*])[\\w#$&*]{8,40}$";
+    private final String patternEmail = "[\w]+@[\w]{1,252}+.edu.com.vn";
+    final  Pattern ptUserName = Pattern.compile(patternUserName);
+    final  Pattern ptPassword = Pattern.compile(patternPassword);
+    final  Pattern ptEmail = Pattern.compile(patternEmail);
     public String getUserName() {
         return userName;
     }
@@ -60,36 +66,71 @@ public class UserBusiness implements IUserBusiness{
     }
 
     @Override
-    public boolean login(String userNameInput, String maHoaInput) {
-       String maHoaPass = maHoaPassword(password);
-       if(maHoaPass.equals(maHoaInput)&& userNameInput==userName) return true;
-        return false;
+    public boolean login(String user, String password, String md5Pw) {
+
+      if(user.trim().isEmpty()){
+          System.out.println("User khong duoc de trong");
+          return false;
+      }
+      if (password.trim().isEmpty()){
+          System.out.println("Password khong duoc de trong");
+          return false;
+      }
+      // Kiem tra xem co hop le hay khong
+
+
+        if(!ptUserName.matcher(user).matches() && !ptEmail.matcher(user).matches()){
+            System.out.println("sai ten tai khoan hoac email");
+            return false;
+        }
+        if(ptUserName.matcher(user).matches()|| ptEmail.matcher(user).matches()){
+            if(ptPassword.matcher(password).matches()){
+                // can them 1 buoc de ma hoa mat khau
+                if(DigestUtils.md5Hex(password).toLowerCase(Locale.ROOT).equals(md5Pw)){
+                    System.out.println("Sai ten tai khoan hoac email sai dinh dang");
+                    return true;
+                }
+                else {
+                    System.out.println("Mat khau khong dung");
+                    return false;
+                }
+            }
+            else {
+                System.out.println("Mat khau sai dinh dang");
+            }
+        }
+        return  false;
     }
     @Override
     public boolean register(String userName, String email, String password) {
-        String userRegex = "^(?=.{8,20}$)(?!.*[ ])[a-zA-Z0-9._]+$";
-        String emailRegex = "^(?=.{1,255}$)(?!.*[ ~!?;])[a-zA-Z0-9]+@edu.com.vn$";
-        String regexPassword ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,40}$";
-        boolean ktUsername = userName.matches(userRegex);
-        boolean ktEmail = userName.matches(emailRegex);
-        boolean ktPassword = userName.matches(regexPassword);
-        if(ktUsername && ktEmail && ktPassword) return true;
-        else if (ktUsername == false) {
-            throw new RuntimeException("Username khong hop le");
+        boolean flag1 = false, flag2 = false, flag3=false;
+        if(userName.trim().isEmpty()){
+            System.out.println("Username khong hop le");
+            return false;
+        }
+        else if (ptUserName.matcher(userName).matches()){
+            flag1 = true;
 
         }
-        else if (ktEmail== false) {
-            throw new RuntimeException("Email khong hop le");
+          if(email.trim().isEmpty()){
+            System.out.println("Email khong hop le");
+            return false;
         }
-        else if (ktPassword == false) throw new RuntimeException("Password khong hop le");
+        else if (ptEmail.matcher(email).matches()){
+            flag2 = true;
+
+        }
+        if(password.trim().isEmpty()){
+            System.out.println("Password khong hop le");
+            return false;
+        }
+        else if (ptPassword.matcher(password).matches()){
+            flag3 = true;
+
+        }
+        if(flag1&&flag2&&flag3) return true;
         return false;
     }
 
-    public String maHoaPassword(String password){
-        String password1 = "DeftBlog";
-        String md5Hex = DigestUtils
-                .md5Hex(password).toLowerCase();
-        System.out.println("Hash: " + md5Hex);
-        return  md5Hex;
-    }
+
 }
