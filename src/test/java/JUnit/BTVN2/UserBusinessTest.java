@@ -13,112 +13,50 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.net.URL;
 import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserBusinessTest {
-    private static final int COL_USER = 0;
+    // COL CSV DATA
+    private static final int COL_USERNAME = 0;
     private static final int COL_EMAIL = 1;
     private static final int COL_PASSWORD = 2;
-    private static final int COL_PASS_MD5 = 3;
+    private static final int COL_MD5_PASSWORD = 3;
     private static final int COL_LOGIN = 4;
     private static final int COL_REGISTER = 5;
 
-    @ParameterizedTest(name="Test Username {0}")
-    @CsvFileSource(resources = "/mData.csv", numLinesToSkip = 1)
-    void setUserName(String userName) {
-        Exception e = Assertions.assertThrows(RuntimeException.class,()->{
-            UserBusiness user = new UserBusiness();
-            user.setUserName(userName);
-        });
-        if(userName==null){
-            Assertions.assertEquals("User = null",e.getMessage());
+    // CSV PATH
+    private static final String CSV_PATH = "mData.csv";
+    private final IUserBusiness userBusiness = new UserBusiness();
 
-        }
-        else
-        Assertions.assertEquals("Username khong hop le",e.getMessage());
+    @ParameterizedTest(name = "Đăng nhập với {0} và password {1} kết quả là {3}")
+    @MethodSource("dataLogin")
+    void login(String user, String password, String expectedPw, boolean result) {
+        Assertions.assertEquals(userBusiness.login(user, password, expectedPw), result);
     }
 
-    @ParameterizedTest(name="Test email {0}")
-    @MethodSource("dataEmail")
-    void setEmail(String email) {
-        Exception e = Assertions.assertThrows(RuntimeException.class,()->{
-            UserBusiness user = new UserBusiness();
-            user.setEmail(email);
-        });
-        if(email==null){
-            Assertions.assertEquals("Email = null",e.getMessage());
-
-        }
-        else
-            Assertions.assertEquals("Email khong hop le",e.getMessage());
-    }
-    static Stream<Arguments> dataEmail() throws IOException {
-        Reader in = new FileReader("/home/mayvu/Desktop/Java_Core/First_Pr/src/test/resources/mData.csv");
-        Stream<Arguments> tmp = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in)
-                .stream()
-                .skip(2)
-                .map(r -> Arguments.of(r.get(COL_EMAIL))
-                );
-        return tmp;
+    @ParameterizedTest(name = "Đăng kí với userName {0}, password {1}, email {2} kết quả là {3}")
+    @MethodSource("dataRegister")
+    void register(String user, String password, String email, boolean result) {
+        Assertions.assertEquals(userBusiness.register(user, email, password), result);
     }
 
-    @ParameterizedTest(name="Test password {0}")
-    @MethodSource("dataPassword")
-    void setPassword(String password) {
-        Exception e = Assertions.assertThrows(RuntimeException.class,()->{
-            UserBusiness user = new UserBusiness();
-            user.setPassword(password);
-        });
-        if(password==null){
-            Assertions.assertEquals("Password = null",e.getMessage());
-
-        }
-        else
-            Assertions.assertEquals("Password khong hop le",e.getMessage());
-    }
-    static Stream<Arguments> dataPassword() throws IOException {
-        Reader in = new FileReader("/home/mayvu/Desktop/Java_Core/First_Pr/src/test/resources/mData.csv");
+    private final static Stream<Arguments> dataLogin() throws IOException {
+        URL url = Thread.currentThread().getContextClassLoader().getResource(CSV_PATH);
+        Reader in = new FileReader(url.getPath());
         List<CSVRecord> tmp = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in).getRecords();
-        // Tinh kinh thuoc, dong dau la header
-        long len = tmp.size();
-        Stream<Arguments> rs = tmp.stream().skip(5).limit(1)
-                .map(r-> Arguments.of(
-                        r.get(COL_PASSWORD)
-                ));
-        return rs;
+        Stream<Arguments> mData = tmp.stream().limit(4).map(r -> Arguments.of(r.get(COL_USERNAME), r.get(COL_PASSWORD), r.get(COL_MD5_PASSWORD), r.get(COL_LOGIN)));
+        return mData;
     }
-    @ParameterizedTest(name="Test user {0} email {1} password {2} encrytPass {3} login {4}")
-    @MethodSource("dataUserEmailPasswordLogin")
-    void login(String userName, String email, String password, String passMd5, String login) {
-        Exception e = Assertions.assertThrows(RuntimeException.class,()->{
-            UserBusiness user = new UserBusiness();
-            user.setUserName(userName);
-            user.setEmail(email);
-            user.setPassword(password);
-            if(userName == null){
-                boolean isLogin = user.login(email,passMd5);
-            }
-            else if (email == null){
-                boolean isLogin = user.login(userName,passMd5);
-            }
-            else {
-                boolean isLogin = user.login(userName,passMd5);
-            }
 
-        });
-        Assertions.assertEquals("Username khong hop le",e.getMessage());
-    }
-    static Stream<Arguments> dataUserEmailPasswordLogin() throws IOException {
-        Reader in = new FileReader("/home/mayvu/Desktop/Java_Core/First_Pr/src/test/resources/mData.csv");
-        Stream<Arguments> tmp = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in)
-                .stream()
-                .skip(1)
-                .limit(4)
-                .map(r -> Arguments.of(r.get(COL_USER),r.get(COL_EMAIL),r.get(COL_PASSWORD),r.get(COL_PASS_MD5),r.get(COL_LOGIN))
-                );
-        return tmp;
+    private final static Stream<Arguments> dataRegister() throws IOException {
+        URL url = Thread.currentThread().getContextClassLoader().getResource(CSV_PATH);
+        Reader in = new FileReader(url.getPath());
+        List<CSVRecord> tmp = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in).getRecords();
+        Stream<Arguments> mData = tmp.stream().skip(6).map(r -> Arguments.of(r.get(COL_USERNAME), r.get(COL_PASSWORD), r.get(COL_EMAIL), r.get(COL_REGISTER)));
+        return mData;
     }
 }
